@@ -2,6 +2,7 @@
 import pandas as pd
 import statistics
 from matplotlib import pyplot
+import seaborn
 
 data = pd.read_csv('data/yelp_dataset/user_data.csv', encoding = "ISO-8859-1")
 
@@ -29,3 +30,24 @@ pyplot.hist(one_rating, alpha = .5, label = 'one rating')
 
 pyplot.legend(loc = 'upper right')
 pyplot.show()
+
+
+
+trim_data = data[data['review_count'] < 100]
+
+count_vec = trim_data['review_count']
+score_vec = trim_data['average_stars']
+
+
+pyplot.scatter(count_vec, score_vec, alpha = .005)
+pyplot.show()
+
+df = data
+
+count_vec = df['review_count']
+score_vec = df['average_stars']
+
+
+ax = seaborn.violinplot(x = score_vec, y = count_vec)
+ax
+ax.show()
