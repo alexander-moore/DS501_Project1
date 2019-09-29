@@ -3,6 +3,7 @@ import pandas as pd
 import statistics
 from matplotlib import pyplot
 import seaborn
+import numpy as np
 
 data = pd.read_csv('data/yelp_dataset/user_data.csv', encoding = "ISO-8859-1")
 
@@ -33,7 +34,7 @@ pyplot.show()
 
 
 
-trim_data = data[data['review_count'] < 100]
+trim_data = data[data['review_count'] < 50]
 
 count_vec = trim_data['review_count']
 score_vec = trim_data['average_stars']
@@ -44,10 +45,21 @@ pyplot.show()
 
 df = data
 
-count_vec = df['review_count']
-score_vec = df['average_stars']
+squish_data = data.copy()
 
+# turn the high-count obs into 30-count
+squish_data['review_count'] = np.select(
+    [squish_data["review_count"] > 30], 
+    [30], 
+    squish_data["review_count"]
+)
 
-ax = seaborn.violinplot(x = score_vec, y = count_vec)
-ax
-ax.show()
+count_vec = squish_data['review_count']
+score_vec = squish_data['average_stars']
+
+round_score = [ round(elem) for elem in score_vec ]
+
+seaborn.set(style="whitegrid")
+seaborn.violinplot(x = round_score, y = count_vec)
+
+pyplot.show()
