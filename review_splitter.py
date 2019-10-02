@@ -5,13 +5,20 @@ from matplotlib import pyplot
 import seaborn
 import numpy as np
 
-data = pd.read_csv('data/yelp_dataset/user_data.csv', encoding = "ISO-8859-1")
+data = pd.read_csv('data/user_data.csv', encoding = "ISO-8859-1")
 
 print(data)
 
 print(data.columns.values)
 
 print(statistics.median(list(data['review_count'])))
+
+reviews = data['average_stars']
+
+pyplot.hist(reviews, label = 'All reviews')
+pyplot.legend(loc = 'upper right')
+pyplot.xlabel('Average Stars')
+pyplot.show()
 
 low_count = data[data['review_count'] < 5]
 high_count = data[data['review_count'] > 5]
