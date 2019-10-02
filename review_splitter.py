@@ -15,11 +15,6 @@ print(statistics.median(list(data['review_count'])))
 
 reviews = data['average_stars']
 
-pyplot.hist(reviews, label = 'All reviews')
-pyplot.legend(loc = 'upper right')
-pyplot.xlabel('Average Stars')
-pyplot.show()
-
 low_count = data[data['review_count'] < 5]
 high_count = data[data['review_count'] > 5]
 one_count = data[data['review_count'] == 1]
@@ -34,25 +29,32 @@ one_rating = one_count['average_stars']
 all_ratings = data['average_stars']
 
 
-pyplot.hist(all_ratings, alpha = 1, label = 'Distribution of all reviews')
-pyplot.legend(loc = 'upper right')
+pyplot.hist(all_ratings, alpha = 1, label = 'Distribution of all reviews', color = 'lightsalmon')
+pyplot.legend(loc = 'upper left')
 pyplot.xlabel('Average Review')
 pyplot.ylabel('Review Count')
 pyplot.show()
 
 pyplot.hist(high_ratings, alpha = 1, label = 'Accounts with more than 5 reviews')
-pyplot.legend(loc = 'upper right')
+pyplot.axis([1, 5, 0,300000])
+pyplot.legend(loc = 'upper left')
+pyplot.xlabel('Average Review')
+pyplot.ylabel('Review Count')
 pyplot.show()
 
 pyplot.hist(high_ratings, alpha = 1, label = 'Accounts with more than 5 reviews')
-pyplot.hist(low_ratings, alpha = .8, label = 'Accounts with less than 5 reviews')
-pyplot.legend(loc = 'upper right')
+pyplot.hist(low_ratings, alpha = 1, label = 'Accounts with less than 5 reviews')
+pyplot.legend(loc = 'upper left')
+pyplot.xlabel('Average Review')
+pyplot.ylabel('Review Count')
 pyplot.show()
 
 pyplot.hist(high_ratings, alpha = 1, label = 'Accounts with more than 5 reviews')
-pyplot.hist(low_ratings, alpha = .8, label = 'Accounts with less than 5 reviews')
-pyplot.hist(one_rating, alpha = .6, label = 'Accounts with one review')
-pyplot.legend(loc = 'upper right')
+pyplot.hist(low_ratings, alpha = 1, label = 'Accounts with less than 5 reviews')
+pyplot.hist(one_rating, alpha = 1, label = 'Accounts with one review')
+pyplot.legend(loc = 'upper left')
+pyplot.xlabel('Average Review')
+pyplot.ylabel('Review Count')
 pyplot.show()
 
 
